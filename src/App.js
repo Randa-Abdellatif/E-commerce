@@ -72,7 +72,7 @@ let routers=createBrowserRouter([
     {path:"Products",element:<ProtectedRoute><Products/></ProtectedRoute> },
     {path:"Register",element:<Register/>},
     {path:"Login",element:<Login saveUserData={saveUserData}/>},
-    {path:"*",element:<NotFound/>}
+    {path:"*",element:<Home/>}
 
   ]}
 ])
