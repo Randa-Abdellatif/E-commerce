@@ -21,7 +21,7 @@ part 20 loading spinner
 
 import logo from './logo.svg';
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, HashRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Components/Layout/Layout'
 import Cart from './Components/Cart/Cart'
 import Gallery from './Components/Gallery/Gallery'
@@ -62,8 +62,9 @@ function App() {
   //   setUserData(null);
   //   return <Navigate to={'/login'}/>
   // }
+  
 
-let routers=createBrowserRouter([
+let routers=createHashRouter([
   {path:'',element:<Layout setUserData={setUserData} userData={userData}/>, children:[
     {index:true , element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:"Cart",element:<ProtectedRoute><Cart/></ProtectedRoute>},
@@ -72,7 +73,7 @@ let routers=createBrowserRouter([
     {path:"Products",element:<ProtectedRoute><Products/></ProtectedRoute> },
     {path:"Register",element:<Register/>},
     {path:"Login",element:<Login saveUserData={saveUserData}/>},
-    {path:"*",element:<Home/>}
+    {path:"*",element:<Login saveUserData={saveUserData}/>}
 
   ]}
 ])
