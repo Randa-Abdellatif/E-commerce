@@ -1,4 +1,5 @@
 /*https://documenter.getpostman.com/view/5709532/2s93JqTRWN */
+/*npm run build */
 /*part 7 rev */
 /*part 8 Formik */
 /*part 9 custom validation */
@@ -64,7 +65,7 @@ function App() {
   // }
   
 
-let routers=createHashRouter([
+let routers=createBrowserRouter([
   {path:'',element:<Layout setUserData={setUserData} userData={userData}/>, children:[
     {index:true , element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:"Cart",element:<ProtectedRoute><Cart/></ProtectedRoute>},
