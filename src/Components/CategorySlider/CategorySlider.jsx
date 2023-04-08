@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './CategorySlider.module.css';
 import Slider from "react-slick";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 
 export default function CategorySlider() {
@@ -12,7 +14,6 @@ export default function CategorySlider() {
   {
     let{data} = await axios.get(`https://route-ecommerce.onrender.com/api/v1/categories`);
     setCategories(data.data);
-    // console.log(data.data);
   }
 
   useEffect(()=>{
@@ -28,10 +29,15 @@ export default function CategorySlider() {
   };
 
   return <>
+  
       <Slider {...settings}>
+      
         {Categories.map((category)=> <div key={category._id}>
-          <img className='w-100' height={200} src={category.image} alt="" />
+        <Link to={`/Categories/${category._id}`}>
+        <img className='w-100' height={200} src={category.image} alt="" />
           <h2 className='h6 pt-2'>{category.name}</h2>
+        </Link>
+          
         </div>)}
       </Slider>
     </>

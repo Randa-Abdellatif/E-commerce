@@ -1,9 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './FeatureProducts.module.css';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
+import toast from 'react-hot-toast';
+
 
 export default function FeatureProducts() {
+  let {addToCart} =useContext(CartContext);
 
   const [products,setProducts]=useState([]);
 
@@ -17,11 +21,22 @@ export default function FeatureProducts() {
   useEffect(()=>{
     getProducts();
   },[])
+
+  async function addProductToCart(productId){
+    let response = await addToCart(productId);
+    console.log(response);
+    if(response.data.status == "success"){
+      toast.success(response.data.message , { position: 'bottom-left', duration: 1000 , className: 'text-center border border-success'});
+    } else{
+      toast.error('Error Adding product');
+    }
+  }
+
   return <>
     <h2>FeatureProducts</h2>
     <div className='row'>
-      {products.map((product)=> {
-        return(<div key={product._id} className='col-md-2'>
+      {products.map((product)=> 
+        <div key={product._id} className='col-md-2 '>
           <div className='product cursor-pointer px-2 py-3'>
             <Link to={`/ProductDetails/${product._id}`}>
             <img className='w-100' src={product.imageCover} alt="" />
@@ -34,13 +49,11 @@ export default function FeatureProducts() {
             </span>
 
           </div>
-          <button className='btn bg-main text-white w-100'>+ Add</button>
             </Link>
-          
+          <button onClick={()=>addProductToCart(product._id)} className='btn bg-main text-white w-100'>+ Add</button>
 
           </div>
-          </div>)
-      })}
+          </div>)}
     </div>
     </>
 }

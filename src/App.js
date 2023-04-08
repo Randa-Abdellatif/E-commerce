@@ -1,23 +1,23 @@
 /*https://documenter.getpostman.com/view/5709532/2s93JqTRWN */
-/*npm run build */
-/*part 7 rev */
-/*part 8 Formik */
-/*part 9 custom validation */
-/*part 10 validation with yup*/
-/*part 11 send register data to api */
-/*part 12 login */
-/* week 3
-part 10 user token //npm i jwt-decode
-part 11 show hide navbar links
-part 12 logout,handle user reload
-part 13,14 ProtectedRoute //npx generate-react-cli component ProtectedRoute
-part 15 p1
-part 15 p2
-part 15 featured product
-part 16 productdetails
-part 17 productdetails slider
-part 18 CategorySlider
-part 20 loading spinner
+/*
+need to do loading in home
+part 1 Context
+part 2 context
+part 3 addToCart
+part 4 reac-hot-toast
+part 5 getLoggedUserCart
+part 6 display Cart
+part 7 display Cart items
+part 8 update product count
+part 9 remove cart item 
+part 10 react-detect-offline
+part 11 react-helmet
+part 12 Project Deployment
+part 13 Project Deployment
+ */
+/*week 4 /
+part 6 updateCartQuantity
+part 7 online Payment
 */
 
 import logo from './logo.svg';
@@ -37,6 +37,10 @@ import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useNavigate , Navigate } from 'react-router-dom';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import CounterContextProvider from './Context/CounterContext';
+import Categories from './Components/Categories/Categories';
+import CartContextProvider from './Context/CartContext';
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -57,12 +61,6 @@ function App() {
     setUserData(decodeToken);
   }
 
-
-  // function logOut(){
-  //   localStorage.removeItem('userToken');
-  //   setUserData(null);
-  //   return <Navigate to={'/login'}/>
-  // }
   
 
 let routers=createBrowserRouter([
@@ -70,6 +68,7 @@ let routers=createBrowserRouter([
     {index:true , element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:"Cart",element:<ProtectedRoute><Cart/></ProtectedRoute>},
     {path:"Gallery",element:<ProtectedRoute><Gallery/></ProtectedRoute>},
+    {path:"Categories/:id",element:<ProtectedRoute><Categories/></ProtectedRoute>},
     {path:"ProductDetails/:id",element:<ProtectedRoute><ProductDetails/></ProtectedRoute>},
     {path:"Products",element:<ProtectedRoute><Products/></ProtectedRoute> },
     {path:"Register",element:<Register/>},
@@ -79,7 +78,13 @@ let routers=createBrowserRouter([
   ]}
 ])
 
-  return <RouterProvider router={routers}></RouterProvider>
+  return<CartContextProvider>
+<CounterContextProvider>
+  <Toaster/>
+  <RouterProvider router={routers}></RouterProvider>
+  </CounterContextProvider>
+  </CartContextProvider>
+   
 }
 
 export default App;

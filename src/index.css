@@ -33,6 +33,10 @@ a , a:hover{
   text-decoration: none;
 }
 
+.border-main
+{
+  border: solid 1px var(--main-color) !important;
+}
 
 body{
   font-family: 'Montserrat Alternates', sans-serif !important;
@@ -86,4 +90,15 @@ a , a:hover{
   -moz-transform: translateY(0%);
   -ms-transform: translateY(0%);
   -o-transform: translateY(0%);
+}
+
+.network
+{
+  padding:10px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  box-shadow: var(--shadow);
+  background-color: #fff;
+  z-index: 999;
 }
