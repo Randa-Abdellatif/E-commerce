@@ -3,6 +3,7 @@ import styles from './Cart.module.css';
 import { CartContext } from '../../Context/CartContext';
 import {Helmet} from "react-helmet";
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,7 +15,7 @@ export default function Cart() {
 
   async function getCart(){
     let response = await getLoggedUserCart();
-    console.log(response);
+    // console.log(response);
     setcartDetails(response.data)
   }
   async function deleteItem(productId){
@@ -26,7 +27,7 @@ export default function Cart() {
   async function clearItem(){
     let response = await clearCartItem();
     console.log(response);
-    getCart()
+    getCart();
     }
 
   async function updateCount(productId , count)
@@ -45,11 +46,14 @@ export default function Cart() {
                 <meta charSet="utf-8" />
                 <title>Shop Cart</title>
             </Helmet>
-  {cartDetails? <div className='bg-main-light p-4 my-4'>
+
+ 
+   <div className='bg-main-light p-4 my-4'>
       <h5>Shop Cart</h5>
-      <h6 className='text-main'>Total Price : {cartDetails.data.totalCartPrice} EGP</h6>
+       {cartDetails?<>
+        <h6 className='text-main'>Total Price : {cartDetails?.data.totalCartPrice} EGP</h6>
       <button onClick={clearItem} className='btn btn-sm'><i className='text-danger fa-regular fa-trash-can'> </i> Clear</button>
-      {cartDetails.data.products.map((product,index)=><div key={index} className='row border-bottom py-2 my-2 align-items-center'>
+      {cartDetails?.data.products.map((product,index)=><div key={index} className='row border-bottom py-2 my-2 align-items-center'>
         <div className="col-md-1">
           <img className='w-100' src={product.product.imageCover} alt="" />
         </div>
@@ -70,7 +74,26 @@ export default function Cart() {
           
         </div>
       </div>)}
-    </div>:null}
+
+      <div className="dropdown">
+  <button className="btn bg-main dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    checkout
+  </button>
+  <ul className="dropdown-menu">
+    <li><Link className="dropdown-item" to={'/checkoutCash'}>cash</Link></li>
+    <li><Link className="dropdown-item" to={'/checkout'}>visa</Link></li>
+  </ul>
+</div>
+
+      {/* <button className='btn bg-main'>
+        <Link className='text-white' to={'/checkout'}>Checkout</Link>
+      </button> */}
+      </>
+      
+
+:<h6 className='text-main'>Total Price : 0 EGP</h6>} 
+    </div>
+    
     
     </>
 }

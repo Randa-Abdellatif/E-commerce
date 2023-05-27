@@ -17,7 +17,8 @@ part 13 Project Deployment
  */
 /*week 4 /
 part 6 updateCartQuantity
-part 7 online Payment
+part 7 online Payment //https://stripe.com/docs/testing
+part 8 get cart id , update cart items number
 */
 
 import logo from './logo.svg';
@@ -41,6 +42,14 @@ import CounterContextProvider from './Context/CounterContext';
 import Categories from './Components/Categories/Categories';
 import CartContextProvider from './Context/CartContext';
 import { Toaster } from 'react-hot-toast';
+import Checkout from './Components/Checkout/Checkout';
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
+import ResetPassword from './Components/ResetPassword/ResetPassword';
+import UpdatePassword from './Components/UpdatePassword/UpdatePassword';
+import UpdateData from './Components/UpdateData/UpdateData';
+import Wishlist from './Components/Wishlist/Wishlist';
+import CheckoutCash from './Components/CheckoutCash/CheckoutCash';
+
 
 
 
@@ -67,12 +76,20 @@ let routers=createBrowserRouter([
   {path:'',element:<Layout setUserData={setUserData} userData={userData}/>, children:[
     {index:true , element:<ProtectedRoute><Home/></ProtectedRoute>},
     {path:"Cart",element:<ProtectedRoute><Cart/></ProtectedRoute>},
+    {path:"Wishlist",element:<ProtectedRoute><Wishlist/></ProtectedRoute>},
     {path:"Gallery",element:<ProtectedRoute><Gallery/></ProtectedRoute>},
+    {path:"checkout",element:<ProtectedRoute><Checkout/></ProtectedRoute>},
+    {path:"checkoutCash",element:<ProtectedRoute><CheckoutCash/></ProtectedRoute>},
     {path:"Categories/:id",element:<ProtectedRoute><Categories/></ProtectedRoute>},
     {path:"ProductDetails/:id",element:<ProtectedRoute><ProductDetails/></ProtectedRoute>},
     {path:"Products",element:<ProtectedRoute><Products/></ProtectedRoute> },
+    {path:"UpdatePassword",element:<ProtectedRoute><UpdatePassword/></ProtectedRoute> },
+    {path:"UpdateData",element:<ProtectedRoute><UpdateData/></ProtectedRoute> },
+    {path:'allorders',element:<Products/>},
     {path:"Register",element:<Register/>},
     {path:"Login",element:<Login saveUserData={saveUserData}/>},
+    {path:"ForgetPassword",element:<ForgetPassword/>},
+    {path:"ResetPassword",element:<ResetPassword/>},
     {path:"*",element:<Login saveUserData={saveUserData}/>}
 
   ]}

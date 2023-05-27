@@ -15,6 +15,7 @@ export default function Layout({userData , setUserData}) {
   }
 
   return <>
+  <div className='pt-5'>
   <Navbar logOut={logOut} userData={userData}/>
   <Outlet></Outlet>
   <div className='network'>
@@ -22,5 +23,7 @@ export default function Layout({userData , setUserData}) {
     <Offline>Only shown offline (surprise!) <i className='fas fa-wifi'></i></Offline>
   </div>
   <Footer/>
+  </div>
+  
     </>
 }
